@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Slider Calendar</title>
+
+    <style>
+      .container-calendar{
+        padding: 0px;
+        overflow: hidden;
+      }
+      .day{
+        float: left;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-xs-2">
+              <a href="" class="prev-day">
+                <img src="https://via.placeholder.com/50" alt="" class="img-fluid">
+              </a>              
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col container-calendar">
+                  <div id="calendar">
+                    <!-- dynamic content -->
+                  </div>                                    
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-2">
+              <a href="" class="next-day">
+                <img src="https://via.placeholder.com/50" alt="" class="img-fluid">
+              </a>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+
+      $(function() {
+
+        let containerCalendar = $('.container-calendar');       
+        let widthContainer = containerCalendar.outerWidth();
+        let calendar = $('#calendar');
+        let slider = '';
+        let position = 0;
+        let days = 31;
+        let sizeBox = widthContainer/7;
+        let maxPosition = calendar.outerWidth() - sizeBox*(days-7);
+
+        console.log(maxPosition);
+
+        containerCalendar.css('width', widthContainer + 'px');
+        calendar.css('width', sizeBox*days + 'px');
+
+        for(let i = 0; i < days; i++ ) {
+          slider += '<div class="day text-center" style="width:' + sizeBox + 'px' +  '"><h1>D</h1><h3>' + (i+1) + '</h3></div>';
+        }
+
+        calendar.html(slider);
+
+        $('.prev-day').click(function(ev){
+           ev.preventDefault();
+           if(position < 0){
+             position = position + sizeBox;
+             calendar.animate({marginLeft: position + 'px'},500);
+             // calendar.css('margin-left', position + 'px');
+             console.log(position);
+           }          
+        })
+
+        $('.next-day').click(function(ev){
+           ev.preventDefault(); 
+           
+           if(position <= 0){
+             position = position - sizeBox;
+             $(calendar).animate({marginLeft: position + 'px'},500);
+             // calendar.css('marginLeft', position + 'px');             
+             console.log(position);
+           }       
+        })
+
+/*
+        let ele = document.getElementById('days');
+        let date = new Date();
+        let weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+        let slider = '';
+
+        for(let i = 0; i < 31; i++ ) {
+          slider += '<div class="day text-center"><h1>D</h1><h3>' + (i+1) + '</h3></div>';
+        }
+
+        ele.innerHTML = slider;*/
+
+
+
+
+
+      });
+
+
+    // get complete day
+    //let date = new Date();
+
+    // setting name days
+    //let weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+
+    // get name of day of week
+    //let dayOfWeek = weekday[ date.getDay() ]
+
+    //let day = date.getTime();
+
+    // setting months
+    //let months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+
+    // get currently month
+    //let month = months[ date.getMonth() ];
+
+    //console.log( date.getDate() );
+
+    </script>
+
+
+  </body>
+</html>
